@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_PILL = "Pill";
     private static final String TABLE_USER = "user";
     //  create  Tables for poll, voter, and user
-    private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (PILLID INTEGER PRIMARY KEY AUTOINCREMENT, PILLNAME TEXT, ELECTIONYEAR INTEGER)";
+    private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (PILLID INTEGER PRIMARY KEY AUTOINCREMENT, PILLNAME TEXT, USERID INTEGER, TIMETOTAKE DATE)";
     private static final String CREATE_TABLE_USER = "CREATE TABLE "  + TABLE_USER+ " (USERID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, EMAIL TEXT, PASSWORD TEXT)";
 
     public DatabaseHelper(Context context) {
@@ -44,16 +44,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         // creating required tables
-        sqLiteDatabase.execSQL(CREATE_TABLE_POLL);
-        sqLiteDatabase.execSQL(CREATE_TABLE_VOTER);
+        sqLiteDatabase.execSQL(CREATE_TABLE_PILL);
         sqLiteDatabase.execSQL(CREATE_TABLE_USER);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         // on upgrade drop older tables
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_POLL);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_VOTER);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_PILL);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         // create new tables
         onCreate(sqLiteDatabase);
@@ -61,14 +59,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ------------------------ "POLL" table methods ----------------//
 
-    public Boolean insertPoll(PollModel poll) {
+    public Boolean insertPill(PillModel pill) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("FIRSTNAME", poll.getFirstName());
-        values.put("LASTNAME", poll.getLastName());
-        values.put("STATE", poll.getState());
-        values.put("PARTY", poll.getParty());
+        values.put("PILLNAME", pill.getPillName());
+        values.put("PILLID", pill.getPillID());
+        values.put("USERID", pill.getUserId());
+        values.put("TIMETOTAKE", pill.getTimeToTake());
         values.put("ELECTIONYEAR",poll.getElectionYear());
 
 

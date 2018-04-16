@@ -154,7 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("USERNAME", user.getUsername());
         values.put("USERID", user.getUserId());
         values.put("PASSWORD", user.getPassword());
-        values.put("EMAIL", user.getEmail());]
+        values.put("EMAIL", user.getEmail());
 
 
         // insert row
@@ -182,7 +182,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         user.setUserId((resultSet.getInt(resultSet.getColumnIndex("USERID"))));
         user.setPassword((resultSet.getString(resultSet.getColumnIndex("PASSWORD"))));
         user.setEmail((resultSet.getString(resultSet.getColumnIndex("EMAIL"))));
-        return voter;
+        return user;
     }
 
     // GET Voter LIST

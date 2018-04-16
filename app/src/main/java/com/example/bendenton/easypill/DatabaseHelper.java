@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by tabegaz on 3/23/18.
+ * Created by tabegaz on 3/23/18. Changed by bendenton and noahphillips on 04/16/18.
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_PILL = "Pill";
     private static final String TABLE_USER = "user";
     //  create  Tables for poll, voter, and user
-    private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (PILLID INTEGER PRIMARY KEY AUTOINCREMENT, PILLNAME TEXT, USERID INTEGER, TIMETOTAKE DATE, ISTAKEN BOOLEAN)";
+    private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (PILLID INTEGER PRIMARY KEY AUTOINCREMENT, PILLNAME TEXT, USERID INTEGER, TIMETOTAKE DATE, ISTAKEN INTEGER)";
     private static final String CREATE_TABLE_USER = "CREATE TABLE "  + TABLE_USER+ " (USERID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, EMAIL TEXT, PASSWORD TEXT)";
 
     public DatabaseHelper(Context context) {
@@ -81,11 +81,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    // get single candidate record from poll table
-    public PollModel getPoll(long candidateId) {
+    // get single user record from pill table
+    public PillModel getPill(long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_POLL + " WHERE  CANDIDATEID =" + candidateId;
+        String selectQuery = "SELECT  * FROM " + TABLE_PILL + " WHERE  CANDIDATEID =" + userId;
 
         Cursor resultSet = db.rawQuery(selectQuery, null);
 
@@ -93,42 +93,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             resultSet.moveToFirst();
 
 
-        PollModel poll = new PollModel();
-        poll.setFirstName((resultSet.getString(resultSet.getColumnIndex("FIRSTNAME"))));
-        poll.setLastName((resultSet.getString(resultSet.getColumnIndex("LASTNAME"))));
-        poll.setParty((resultSet.getString(resultSet.getColumnIndex("PARTY"))));
-        poll.setState((resultSet.getString(resultSet.getColumnIndex("STATE"))));
-        poll.setElectionYear((resultSet.getInt(resultSet.getColumnIndex("ELECTIONYEAR"))));
-        return poll;
+        PillModel pill = new PillModel();
+        pill.setPillName((resultSet.getString(resultSet.getColumnIndex("PILLNAME"))));
+        pill.setTimeToTake((resultSet.getString(resultSet.getColumnIndex("TIMETOTAKE"))));
+        pill.setIsTaken((resultSet.getInt(resultSet.getColumnIndex("ISTAKEN"))));
+        return pill;
     }
 
-    // GET POLL LIST
-    public List<PollModel> getAllCadidates() {
-        List<PollModel> pollList = new ArrayList<PollModel>();
-        String selectQuery = "SELECT  * FROM " + TABLE_POLL;
+    // GET PILL LIST
+    public List<PillModel> getAllCadidates() {
+        List<PillModel> pillList = new ArrayList<PillModel>();
+        String selectQuery = "SELECT  * FROM " + TABLE_PILL;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor resultSet = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (resultSet.moveToFirst()) {
             do {
-                PollModel poll = new PollModel();
-                poll.setCandidateId((resultSet.getInt(resultSet.getColumnIndex("CANDIDATEID"))));
-                poll.setFirstName((resultSet.getString(resultSet.getColumnIndex("FIRSTNAME"))));
-                poll.setLastName((resultSet.getString(resultSet.getColumnIndex("LASTNAME"))));
-                poll.setParty((resultSet.getString(resultSet.getColumnIndex("PARTY"))));
-                poll.setState((resultSet.getString(resultSet.getColumnIndex("STATE"))));
-                poll.setElectionYear((resultSet.getInt(resultSet.getColumnIndex("ELECTIONYEAR"))));
+                PillModel pill = new PillModel();
+                pill.setPillName((resultSet.getString(resultSet.getColumnIndex("PILLNAME"))));
+                pill.setTimeToTake((resultSet.getString(resultSet.getColumnIndex("TIMETOTAKE"))));
+                pill.setIsTaken((resultSet.getInt(resultSet.getColumnIndex("ISTAKEN"))));
 
                 // adding to poll list
-                pollList.add(poll);
+                pillList.add(pill);
             } while (resultSet.moveToNext());
         }
 
-        return pollList;
+        return pillList;
     }
 
-    public int updatePoll(PollModel poll) {
+    public int updatePoll(PillModel pill) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

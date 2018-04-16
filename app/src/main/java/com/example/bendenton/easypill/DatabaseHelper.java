@@ -93,13 +93,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         PillModel pill = new PillModel();
         pill.setPillName((resultSet.getString(resultSet.getColumnIndex("PILLNAME"))));
-        pill.setTimeToTake((resultSet.getString(resultSet.getColumnIndex("TIMETOTAKE"))));
+        pill.setTimeToTakeString((resultSet.getString(resultSet.getColumnIndex("TIMETOTAKE"))));
         pill.setIsTaken((resultSet.getInt(resultSet.getColumnIndex("ISTAKEN"))));
         return pill;
     }
 
     // GET PILL LIST
-    public List<PillModel> getAllCadidates() {
+    public List<PillModel> getAllPills() {
         List<PillModel> pillList = new ArrayList<PillModel>();
         String selectQuery = "SELECT  * FROM " + TABLE_PILL;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -110,7 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 PillModel pill = new PillModel();
                 pill.setPillName((resultSet.getString(resultSet.getColumnIndex("PILLNAME"))));
-                pill.setTimeToTake((resultSet.getString(resultSet.getColumnIndex("TIMETOTAKE"))));
+                pill.setTimeToTakeString((resultSet.getString(resultSet.getColumnIndex("TIMETOTAKE"))));
                 pill.setIsTaken((resultSet.getInt(resultSet.getColumnIndex("ISTAKEN"))));
 
                 // adding to poll list
@@ -125,41 +125,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("FIRSTNAME", poll.getFirstName());
-        values.put("LASTNAME", poll.getLastName());
-        values.put("PARTY", poll.getParty());
-        values.put("STATE", poll.getState());
-        values.put("ELECTIONYEAR", poll.getState());
+        values.put("PILLNAME", pill.getPillName());
+        values.put("PILLID", pill.getPillID());
+        values.put("USERID", pill.getUserId());
+        values.put("TIMETOTAKE", pill.getTimeToTake());
+        values.put("ISTAKEN",pill.getIsTaken());
         // updating row
-        return db.update(TABLE_POLL, values, "CANDIDATEID" + " = ?",
-                new String[] { String.valueOf(poll.getCandidateId()) });
+        return db.update(TABLE_PILL, values, "USERID" + " = ?",
+                new String[] { String.valueOf(pill.getUserId()) });
     }
 
     /**
      * Deleting a poll
      */
-    public void deletePoll(long candidateId) {
+    public void deletePill(long userId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_POLL, "CANDIDATEID" + " = ?",
-                new String[] { String.valueOf(candidateId) });
+        db.delete(TABLE_PILL, "USERID" + " = ?",
+                new String[] { String.valueOf(userId) });
     }
 
 
     // ------------------------ "VOTER" table methods ----------------//
 
-    public Boolean insertVoter(VoterModel voter) {
+    public Boolean insertUser(UserModel user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("FIRSTNAME", voter.getFirstName());
-        values.put("LASTNAME", voter.getLastName());
-        values.put("STATE", voter.getState());
-        values.put("ADDRESS", voter.getAddress());
-        values.put("ZIPCODE",voter.getZipCode());
+        values.put("USERNAME", user.getUsername());
+        values.put("USERID", user.getUserId());
+        values.put("PASSWORD", user.getPassword());
+        values.put("EMAIL", user.getEmail());
 
 
         // insert row
-        long resultSet = db.insert(TABLE_VOTER, null, values);
+        long resultSet = db.insert(TABLE_USER, null, values);
         if(resultSet== -1)
             return false;
         else
@@ -168,49 +167,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // get single candidate record from poll table
-    public VoterModel getVoter(long voterId) {
+    public UserModel getVoter(long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_VOTER + " WHERE  VOTERID =" + voterId;
+        String selectQuery = "SELECT  * FROM " + TABLE_USER + " WHERE  VOTERID =" + userId;
 
         Cursor resultSet = db.rawQuery(selectQuery, null);
 
         if (resultSet != null)
             resultSet.moveToFirst();
 
-        VoterModel voter = new VoterModel();
-        voter.setFirstName((resultSet.getString(resultSet.getColumnIndex("FIRSTNAME"))));
-        voter.setLastName((resultSet.getString(resultSet.getColumnIndex("LASTNAME"))));
-        voter.setState((resultSet.getString(resultSet.getColumnIndex("STATE"))));
-        voter.setAddress((resultSet.getString(resultSet.getColumnIndex("ADDRESS"))));
-        voter.setZipCode((resultSet.getString(resultSet.getColumnIndex("ZIPCODE"))));
-        return voter;
+        UserModel user = new UserModel();
+        user.setUsername((resultSet.getString(resultSet.getColumnIndex("USERNAME"))));
+        user.setUserId((resultSet.getInt(resultSet.getColumnIndex("USERID"))));
+        user.setPassword((resultSet.getString(resultSet.getColumnIndex("PASSWORD"))));
+        user.setEmail((resultSet.getString(resultSet.getColumnIndex("EMAIL"))));
+        return user;
     }
 
     // GET Voter LIST
-    public List<VoterModel> getAllVoters() {
-        List<VoterModel> voterList = new ArrayList<VoterModel>();
-        String selectQuery = "SELECT  * FROM " + TABLE_VOTER;
+    public List<UserModel> getAllUsers() {
+        List<UserModel> userList = new ArrayList<UserModel>();
+        String selectQuery = "SELECT  * FROM " + TABLE_USER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor resultSet = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (resultSet.moveToFirst()) {
             do {
-                VoterModel voter = new VoterModel();
-                voter.setVoterId((resultSet.getInt(resultSet.getColumnIndex("VOTERID"))));
-                voter.setFirstName((resultSet.getString(resultSet.getColumnIndex("FIRSTNAME"))));
-                voter.setLastName((resultSet.getString(resultSet.getColumnIndex("LASTNAME"))));
-                voter.setState((resultSet.getString(resultSet.getColumnIndex("STATE"))));
-                voter.setAddress((resultSet.getString(resultSet.getColumnIndex("ADDRESS"))));
-                voter.setZipCode((resultSet.getString(resultSet.getColumnIndex("ZIPCODE"))));
+                UserModel user = new UserModel();
+                user.setUsername((resultSet.getString(resultSet.getColumnIndex("USERNAME"))));
+                user.setUserId((resultSet.getInt(resultSet.getColumnIndex("USERID"))));
+                user.setPassword((resultSet.getString(resultSet.getColumnIndex("PASSWORD"))));
+                user.setEmail((resultSet.getString(resultSet.getColumnIndex("EMAIL"))));
 
                 // adding to voter list
-                voterList.add(voter);
+                userList.add(user);
             } while (resultSet.moveToNext());
         }
 
-        return voterList;
+        return userList;
     }
 
     public String getSecurePassword(String passwordToHash, String messageSalt){
@@ -231,7 +227,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return generatedPassword;
     }
 
-    public boolean insertUser(UserModel user)
+    /*public boolean insertUser(UserModel user)
     {
         String password;
         password= getSecurePassword(user.getPassword(),    "CSCI3660, Mobile App Development");
@@ -246,7 +242,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return true;
 
-    }
+    }*/
+
     public Boolean getLoginInfo(UserModel user){
         SQLiteDatabase db = this.getReadableDatabase();
         String password;

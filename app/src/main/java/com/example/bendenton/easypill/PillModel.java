@@ -13,7 +13,6 @@ public class PillModel {
 
     public String getPillName() {
         return pillName;
-        // Comment
     }
 
     public Date getTimeToTake() {

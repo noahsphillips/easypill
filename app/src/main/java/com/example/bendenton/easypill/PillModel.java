@@ -54,7 +54,7 @@ public class PillModel {
 
     }
 
-    public PillModel(Date timeToTake, String pillName, boolean isTaken, int userId) {
+    public PillModel(Date timeToTake, String pillName, int isTaken, int userId) {
         this.timeToTake = timeToTake;
         this.pillName = pillName;
         this.isTaken = isTaken;

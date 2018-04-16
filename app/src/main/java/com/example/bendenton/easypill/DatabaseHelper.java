@@ -14,7 +14,6 @@ import android.util.Log;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("PILLNAME", pill.getPillName());
         values.put("PILLID", pill.getPillID());
         values.put("USERID", pill.getUserId());
-        values.put("TIMETOTAKE", dateFormat.format(pill.getTimeToTake()));
+        values.put("TIMETOTAKE", pill.getTimeToTake());
         values.put("ISTAKEN",pill.getIsTaken());
 
 

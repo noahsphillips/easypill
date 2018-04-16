@@ -8,11 +8,12 @@ import java.util.Date;
 
 public class PillModel {
     private String pillName;
-    private Date timeToTake;
+    private String timeToTake;
     private int pillID;
     private int userId;
     private int isTaken; // 0 for not, 1 for taken
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+    //SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 
     public int getPillID() {
         return pillID;
@@ -23,7 +24,7 @@ public class PillModel {
     }
 
     public String getTimeToTake() {
-        return dateFormat.format(timeToTake);
+        return timeToTake;
     }
 
     public int getIsTaken() {
@@ -46,7 +47,7 @@ public class PillModel {
         this.isTaken = isTaken;
     }
 
-    public void setTimeToTake(Date timeToTake) {
+    public void setTimeToTakeString(String timeToTake) {
         this.timeToTake = timeToTake;
     }
 
@@ -54,7 +55,7 @@ public class PillModel {
 
     }
 
-    public PillModel(Date timeToTake, String pillName, int isTaken, int userId) {
+    public PillModel(String timeToTake, String pillName, int isTaken, int userId) {
         this.timeToTake = timeToTake;
         this.pillName = pillName;
         this.isTaken = isTaken;

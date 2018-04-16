@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_PILL = "Pill";
     private static final String TABLE_USER = "user";
     //  create  Tables for poll, voter, and user
-    private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (PILLID INTEGER PRIMARY KEY AUTOINCREMENT, PILLNAME TEXT, USERID INTEGER, TIMETOTAKE DATE)";
+    private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (PILLID INTEGER PRIMARY KEY AUTOINCREMENT, PILLNAME TEXT, USERID INTEGER, TIMETOTAKE DATE, ISTAKEN BOOLEAN)";
     private static final String CREATE_TABLE_USER = "CREATE TABLE "  + TABLE_USER+ " (USERID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, EMAIL TEXT, PASSWORD TEXT)";
 
     public DatabaseHelper(Context context) {
@@ -67,11 +67,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("PILLID", pill.getPillID());
         values.put("USERID", pill.getUserId());
         values.put("TIMETOTAKE", pill.getTimeToTake());
-        values.put("ELECTIONYEAR",poll.getElectionYear());
+        values.put("ISTAKEN",pill.getIsTaken());
 
 
         // insert row
-        long resultSet = db.insert(TABLE_POLL, null, values);
+        long resultSet = db.insert(TABLE_PILL, null, values);
         if(resultSet== -1)
             return false;
         else

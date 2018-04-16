@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_PILL = "Pill";
     private static final String TABLE_USER = "user";
     //  create  Tables for poll, voter, and user
-    private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (CANDIDATEID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT, LASTNAME TEXT, PARTY TEXT, STATE TEXT, ELECTIONYEAR INTEGER)";
+    private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (PILLID INTEGER PRIMARY KEY AUTOINCREMENT, PILLNAME TEXT, ELECTIONYEAR INTEGER)";
     private static final String CREATE_TABLE_USER = "CREATE TABLE "  + TABLE_USER+ " (USERID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, EMAIL TEXT, PASSWORD TEXT)";
 
     public DatabaseHelper(Context context) {

@@ -8,8 +8,14 @@ import java.util.Date;
 public class PillModel {
     private String pillName;
     private Date timeToTake;
+    private int pillID;
     private int userId;
     private boolean isTaken;
+
+    public int getPillID() {
+        return pillID;
+        // Comment
+    }
 
     public String getPillName() {
         return pillName;

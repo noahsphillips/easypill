@@ -62,7 +62,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Boolean insertPill(PillModel pill) {
         SQLiteDatabase db = this.getWritableDatabase();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
         ContentValues values = new ContentValues();
         values.put("PILLNAME", pill.getPillName());

@@ -3,6 +3,7 @@ package com.example.bendenton.easypill;
 import android.content.Context;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PillModel {
@@ -10,22 +11,22 @@ public class PillModel {
     private Date timeToTake;
     private int pillID;
     private int userId;
-    private boolean isTaken;
+    private int isTaken; // 0 for not, 1 for taken
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     public int getPillID() {
         return pillID;
-        // Comment
     }
 
     public String getPillName() {
         return pillName;
     }
 
-    public Date getTimeToTake() {
-        return timeToTake;
+    public String getTimeToTake() {
+        return dateFormat.format(timeToTake);
     }
 
-    public boolean getIsTaken() {
+    public int getIsTaken() {
         return isTaken;
     }
 
@@ -41,7 +42,7 @@ public class PillModel {
         this.pillName = pillName;
     }
 
-    public void setIsTaken(Boolean isTaken) {
+    public void setIsTaken(Integer isTaken) {
         this.isTaken = isTaken;
     }
 

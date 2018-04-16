@@ -10,9 +10,10 @@ public class PillModel {
     private Date timeToTake;
     private int userId;
     private boolean isTaken;
-    
+
     public String getPillName() {
         return pillName;
+        // Comment
     }
 
     public Date getTimeToTake() {

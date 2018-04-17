@@ -3,6 +3,21 @@ import android.content.Context;
 import android.util.Log;
 
 public class UserModel{
+
+    private String username;
+    private String password;
+    private String email;
+    private int userId;
+
+    public UserModel() {
+
+    }
+
+    public UserModel(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -10,11 +25,6 @@ public class UserModel{
     public String getPassword() {
         return password;
     }
-
-    private String username;
-    private String password;
-    private String email;
-    private int userId;
 
     public int getUserId() {
         return userId;
@@ -32,24 +42,12 @@ public class UserModel{
         this.email = email;
     }
 
-
-
     public String getEmail() {
         return email;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public UserModel() {
-
-    }
-
-    public UserModel(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
     }
 
     @Override

@@ -16,6 +16,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginController"
+            android:label="Log In"
+            >
+        </activity>
+        <activity
+            android:name=".RegisterController"
+            android:label="Sign Up"
+            >
+        </activity>
+        <activity
+            android:name=".PillsController"
+            android:label="Upcoming Pills"
+            ></activity>
     </application>
 
 </manifest>

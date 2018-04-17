@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 2;
     // Table Names
-    private static final String TABLE_PILL = "Pill";
+    private static final String TABLE_PILL = "pill";
     private static final String TABLE_USER = "user";
     //  create  Tables for poll, voter, and user
     private static final String CREATE_TABLE_PILL = "CREATE TABLE "  + TABLE_PILL+ " (PILLID INTEGER PRIMARY KEY AUTOINCREMENT, PILLNAME TEXT, USERID INTEGER, TIMETOTAKE DATE, ISTAKEN INTEGER)";
@@ -38,7 +38,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -152,8 +151,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put("USERNAME", user.getUsername());
-        values.put("USERID", user.getUserId());
-        values.put("PASSWORD", user.getPassword());
+       String  password= getSecurePassword(user.getPassword(),    "CSCI3660, Mobile App Development");
+        values.put("PASSWORD", password);
         values.put("EMAIL", user.getEmail());
 
 
@@ -167,7 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // get single candidate record from poll table
-    public UserModel getVoter(long userId) {
+    public UserModel getUser(long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String selectQuery = "SELECT  * FROM " + TABLE_USER + " WHERE  VOTERID =" + userId;
@@ -250,6 +249,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         password= getSecurePassword(user.getPassword(),    "CSCI3660, Mobile App Development");
         String query = "Select USERNAME, PASSWORD FROM " + TABLE_USER + " WHERE USERNAME = '"+user.getUsername() +"' AND PASSWORD= '"+password+"'";
         Cursor resultSet = db.rawQuery(query, null);
+        System.out.println(resultSet);
         if(resultSet.getCount()== 0)
             return false;
         else

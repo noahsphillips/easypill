@@ -55,11 +55,10 @@ public class PillModel {
 
     }
 
-    public PillModel(String timeToTake, String pillName, int isTaken, int userId) {
+    public PillModel(String timeToTake, String pillName, int isTaken) {
         this.timeToTake = timeToTake;
         this.pillName = pillName;
         this.isTaken = isTaken;
-        this.userId = userId;
     }
 
     @Override

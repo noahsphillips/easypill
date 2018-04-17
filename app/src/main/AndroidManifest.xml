@@ -29,6 +29,10 @@
             android:name=".PillsController"
             android:label="Upcoming Pills"
             ></activity>
+        <activity
+            android:name=".NewPillController"
+            android:label="Add a New Pill"
+            ></activity>
     </application>
 
 </manifest>

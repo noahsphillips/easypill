@@ -63,8 +63,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put("PILLNAME", pill.getPillName());
-        values.put("PILLID", pill.getPillID());
-        values.put("USERID", pill.getUserId());
         values.put("TIMETOTAKE", pill.getTimeToTake());
         values.put("ISTAKEN",pill.getIsTaken());
 
@@ -125,8 +123,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put("PILLNAME", pill.getPillName());
-        values.put("PILLID", pill.getPillID());
-        values.put("USERID", pill.getUserId());
         values.put("TIMETOTAKE", pill.getTimeToTake());
         values.put("ISTAKEN",pill.getIsTaken());
         // updating row

@@ -1,49 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <LinearLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/futurePillListView"
+            android:id="@+id/pastPillListView"
             android:layout_width="match_parent"
-            android:layout_height="582dp" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:clickable="true"
-            android:id="@+id/newPillRegister"
-            android:layout_height="60dp"
-            android:layout_marginLeft="355dp"
-            android:layout_width="56dp"
-            android:src="@drawable/ic_add_circle_black_24dp" />
+            android:layout_height="639dp"
+            android:clickable="true" />
 
         <android.support.design.widget.BottomNavigationView
             android:clickable="true"
-            android:id="@+id/navigation"
+            android:id="@+id/navigationPast"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="0dp"
             android:layout_weight="0"
-            android:layout_width="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1"
             app:menu="@menu/navigation"
-            tools:layout_editor_absoluteY="622dp" />
+            tools:layout_editor_absoluteY="622dp"/>
 
     </LinearLayout>
+
 </FrameLayout>
-
-
-
-

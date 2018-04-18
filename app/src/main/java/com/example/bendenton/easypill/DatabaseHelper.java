@@ -80,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public PillModel getPill(long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_PILL + " WHERE  CANDIDATEID =" + userId;
+        String selectQuery = "SELECT  * FROM " + TABLE_PILL + " WHERE  USERID =" + userId;
 
         Cursor resultSet = db.rawQuery(selectQuery, null);
 
@@ -118,7 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return pillList;
     }
 
-    public int updatePoll(PillModel pill) {
+    public int updatePill(PillModel pill) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

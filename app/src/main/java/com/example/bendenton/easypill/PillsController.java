@@ -31,24 +31,47 @@ public class PillsController extends AppCompatActivity
             startActivity(new Intent(PillsController.this, NewPillController.class));
         }
     };
+    /*private ListView.OnClickListener futurePillListener
+            = new ListView.OnClickListener()
+    {
+        public void onClick(@NonNull View v)
+        {
+            setContentView(R.layout.pill_info_layout);
+            startActivity(new Intent(PillsController.this, PillInfoController.class));
+        }
+    };
+    private ListView.OnClickListener pastPillListener
+            = new ListView.OnClickListener()
+    {
+        public void onClick(@NonNull View v)
+        {
+            setContentView(R.layout.pill_info_layout);
+            startActivity(new Intent(PillsController.this, PillInfoController.class));
+        }
+    };*/
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         PillModel pill = new PillModel();
         DatabaseHelper db = new DatabaseHelper(this);
         final ArrayList<String> pillNames = new ArrayList<>();
         final List<PillModel> pillList = db.getAllPills();
-        for(PillModel aPill: pillList) {
+        for(PillModel aPill: pillList)
+        {
             pillNames.add(aPill.getPillName());
         }
         setContentView(R.layout.pill_layout);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, pillNames);
         ListView listView = (ListView) findViewById(R.id.futurePillListView);
+        //ListView listView2 = (ListView) findViewById(R.id.pastPillListView);
         listView.setAdapter(adapter);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FloatingActionButton newPill = (FloatingActionButton) findViewById(R.id.newPillRegister);
         newPill.setOnClickListener(newPillListener);
+        //listView.setOnClickListener(futurePillListener);
+        //listView2.setOnClickListener(pastPillListener);
     }
 }
